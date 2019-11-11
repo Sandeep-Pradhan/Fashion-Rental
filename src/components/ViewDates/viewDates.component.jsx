@@ -5,16 +5,21 @@ import DayPicker, { DateUtils } from "react-day-picker";
 import "react-day-picker/lib/style.css";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import { createStructuredSelector } from "reselect";
+import { selectedDates } from "../../redux/dates/dates.actions";
+import { selectDates } from "../../redux/dates/dates.selector";
 
 class viewDates extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props);
+    // console.log(props);
     this.handleDayClick = this.handleDayClick.bind(this);
     this.state = {
-      selectedDays: [],
+      //    selectedDays: [],
+      selectedDays: props.selectDates[props.match.params.id] || [],
       disableDays: [{ before: new Date() }, new Date()]
     };
+    // console.log((props.selectDates[props.match.params.id] || []).length);
   }
 
   handleDayClick(day, { selected }) {
@@ -32,8 +37,19 @@ class viewDates extends React.Component {
     this.setState({ selectedDays });
   }
 
+  save = () => {
+    // console.log(this.state.selectedDays);
+    // console.log(this.props.match.params.id);
+    this.props.selectedDates(
+      this.props.match.params.id,
+      this.state.selectedDays
+    );
+    this.props.history.goBack();
+  };
+
   render() {
-    // console.log(new Date());
+    // console.log(this.props);
+    // console.log(this.props.selectDates[this.props.match.params.id]);
     return (
       <div className="view-date">
         <DayPicker
@@ -44,7 +60,9 @@ class viewDates extends React.Component {
           onDayClick={this.handleDayClick}
         />
         <div className="btn">
-          <button className="save">Save</button>
+          <button className="save" onClick={this.save}>
+            Save
+          </button>
           <button
             className="cancel"
             onClick={() => this.props.history.goBack()}
@@ -57,8 +75,17 @@ class viewDates extends React.Component {
   }
 }
 
-// const mapStateToProps = (state, ownProps) => {
-//   return { stream: state.streams[ownProps.match.params.id] };
-// };
+const mapStateToProps = createStructuredSelector({
+  selectDates: selectDates
+});
 
-export default withRouter(connect(null)(viewDates));
+const mapDispatchToProps = dispatch => ({
+  selectedDates: (item, id) => dispatch(selectedDates(item, id))
+});
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(viewDates)
+);

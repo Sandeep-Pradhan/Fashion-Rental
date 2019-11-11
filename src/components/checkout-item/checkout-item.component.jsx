@@ -9,9 +9,12 @@ import {
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { createStructuredSelector } from "reselect";
+import { selectDates } from "../../redux/dates/dates.selector";
 
-const CheckoutItem = ({ cartItem, clearItem, addItem, removeItem }) => {
-  const { id, name, imageUrl, price, quantity } = cartItem;
+const CheckoutItem = ({ selectDates, cartItem, clearItem }) => {
+  const { id, name, imageUrl, price } = cartItem;
+
   return (
     <div className="checkout-item">
       <div className="image-container">
@@ -27,7 +30,7 @@ const CheckoutItem = ({ cartItem, clearItem, addItem, removeItem }) => {
       </span>
 
       <span className="price">
-        Rs.{price} X {quantity}
+        Rs.{price} X {(selectDates[id] || []).length}
       </span>
       <div className="remove-button" onClick={() => clearItem(cartItem)}>
         &#10005;
@@ -35,12 +38,16 @@ const CheckoutItem = ({ cartItem, clearItem, addItem, removeItem }) => {
     </div>
   );
 };
+
+const mapStateToProps = createStructuredSelector({
+  selectDates: selectDates
+});
 const mapDispatchToProps = dispatch => ({
   clearItem: item => dispatch(clearItemFromCart(item)),
   addItem: item => dispatch(addCartItem(item)),
   removeItem: item => dispatch(removeItem(item))
 });
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(CheckoutItem);

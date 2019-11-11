@@ -1,0 +1,5 @@
+export const DatesActionTypes = {
+  SELECTED_DATES: "SELECTED_DATES",
+  DISABLE_DATES: "DISABLE_DATES",
+  CLEAR_DATES: "CLEAR_DATES"
+};
