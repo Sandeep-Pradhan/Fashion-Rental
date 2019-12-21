@@ -7,18 +7,6 @@ const INITIAL_STATE = {
 const dateReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case DatesActionTypes.SELECTED_DATES:
-      //   return {
-      //     ...state,
-      //     selectedDates: [
-      //       ...state.selectedDates,
-      //       {
-      //         id: action.payload.id,
-      //         dates: action.payload.dates
-      //       }
-      //     ]
-      //   };
-      console.log("bdajhbahcbaj");
-      console.log(state);
       return {
         ...state,
         selectedDates: {
