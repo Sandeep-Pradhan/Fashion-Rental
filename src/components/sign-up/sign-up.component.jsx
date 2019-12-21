@@ -41,7 +41,7 @@ const SignUp = ({ signUpStart }) => {
           name="displayName"
           value={displayName}
           onChange={handleChange}
-          placeholder="Display name"
+          label="Display Name"
           required
         />
         <FormInput
@@ -49,7 +49,7 @@ const SignUp = ({ signUpStart }) => {
           name="email"
           value={email}
           onChange={handleChange}
-          placeholder="Email"
+          label="Email"
           required
         />
         <FormInput
@@ -57,7 +57,7 @@ const SignUp = ({ signUpStart }) => {
           name="password"
           value={password}
           onChange={handleChange}
-          placeholder="Password"
+          label="Password"
           required
         />
         <FormInput
@@ -65,7 +65,7 @@ const SignUp = ({ signUpStart }) => {
           name="confirmPassword"
           value={confirmPassword}
           onChange={handleChange}
-          placeholder="Confirm Password "
+          label="Confirm Password "
           required
         />
         <CustomButton type="submit">Sign Up</CustomButton>

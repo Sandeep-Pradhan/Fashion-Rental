@@ -36,7 +36,7 @@ const SignIn = ({ emailSignInStart, googleSignInStart }) => {
         <FormInput
           name="email"
           type="email"
-          placeholder="Email"
+          label="Email"
           value={email}
           handleChange={handleChange}
           required
@@ -45,7 +45,7 @@ const SignIn = ({ emailSignInStart, googleSignInStart }) => {
         <FormInput
           name="password"
           type="password"
-          placeholder="Password"
+          label="Password"
           value={password}
           required
           handleChange={handleChange}

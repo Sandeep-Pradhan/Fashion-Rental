@@ -87,7 +87,7 @@ export function* signUp({ payload: { email, password, displayName } }) {
     const { user } = yield auth.createUserWithEmailAndPassword(email, password);
     yield put(signUpSuccess({ user, additionalData: { displayName } }));
   } catch (error) {
-    alert(error);
+    // alert(error);
     yield put(signUpFailure(error));
   }
 }
