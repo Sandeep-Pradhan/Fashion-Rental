@@ -13,7 +13,7 @@ import { createStructuredSelector } from "reselect";
 import { selectDates } from "../../redux/dates/dates.selector";
 
 const CheckoutItem = ({ selectDates, cartItem, clearItem }) => {
-  const { id, name, imageUrl, price } = cartItem;
+  const { id, name, imageUrl, price, rdates } = cartItem;
 
   return (
     <div className="checkout-item">
@@ -24,7 +24,13 @@ const CheckoutItem = ({ selectDates, cartItem, clearItem }) => {
       <span className="quantity">
         {/* <span className="value">{quantity}</span> */}
         {/* <button className="value">Select Dates</button> */}
-        <Link to={`/dates/${id}/`} className="link">
+        <Link
+          to={{
+            pathname: `/dates/${id}/`,
+            disdates: rdates
+          }}
+          className="link"
+        >
           Select Dates
         </Link>
       </span>
@@ -47,7 +53,4 @@ const mapDispatchToProps = dispatch => ({
   addItem: item => dispatch(addCartItem(item)),
   removeItem: item => dispatch(removeItem(item))
 });
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CheckoutItem);
+export default connect(mapStateToProps, mapDispatchToProps)(CheckoutItem);

@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 const CollectionItem = ({ item, addCartItem }) => {
   //   console.log(item);
-  const { id, name, price, imageUrl } = item;
+  const { id, name, price, imageUrl, rdates } = item;
   return (
     <div className="collection-item">
       <div className="image" style={{ backgroundImage: `url(${imageUrl})` }} />
@@ -28,7 +28,10 @@ const CollectionItem = ({ item, addCartItem }) => {
         View Availability
       </Link> */}
       <Link
-        to={`/dates/${id}/`}
+        to={{
+          pathname: `/dates/${id}/`,
+          disdates: rdates
+        }}
         style={{
           textDecoration: "none"
         }}
@@ -52,7 +55,4 @@ const CollectionItem = ({ item, addCartItem }) => {
 const mapDispatchToProps = dispatch => ({
   addCartItem: item => dispatch(addCartItem(item))
 });
-export default connect(
-  null,
-  mapDispatchToProps
-)(CollectionItem);
+export default connect(null, mapDispatchToProps)(CollectionItem);

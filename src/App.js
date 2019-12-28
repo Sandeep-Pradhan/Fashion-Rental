@@ -27,7 +27,7 @@ const App = ({ checkUserSession, currentUser }) => {
         <Route exact path="/" component={HomePage} />{" "}
         <Route path="/shop" component={ShopPage} />{" "}
         <Route exact path="/checkout" component={CheckoutPage} />{" "}
-        <Route path="/dates/:id" exact component={ViewDates} />
+        <Route path="/dates/:id" exact component={ViewDates} />{" "}
         <Route
           exact
           path="/signin"
@@ -46,7 +46,4 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = dispatch => ({
   checkUserSession: user => dispatch(checkUserSession())
 });
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

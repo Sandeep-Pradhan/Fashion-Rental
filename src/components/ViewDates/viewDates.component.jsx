@@ -12,12 +12,25 @@ import { selectDates } from "../../redux/dates/dates.selector";
 class viewDates extends React.Component {
   constructor(props) {
     super(props);
+
+    if (typeof props.location.disdates === "undefined") {
+      props.location.disdates = ["0"];
+    }
+
     // console.log(props);
+    for (var i in props.location.disdates) {
+      props.location.disdates[i] = new Date(props.location.disdates[i]);
+    }
+
     this.handleDayClick = this.handleDayClick.bind(this);
     this.state = {
       //    selectedDays: [],
       selectedDays: props.selectDates[props.match.params.id] || [],
-      disableDays: [{ before: new Date() }, new Date()]
+      disableDays: [
+        { before: new Date() },
+        new Date(),
+        ...props.location.disdates
+      ]
     };
     // console.log((props.selectDates[props.match.params.id] || []).length);
   }
@@ -48,8 +61,6 @@ class viewDates extends React.Component {
   };
 
   render() {
-    // console.log(this.props);
-    // console.log(this.props.selectDates[this.props.match.params.id]);
     return (
       <div className="view-date">
         <DayPicker
@@ -84,8 +95,5 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(viewDates)
+  connect(mapStateToProps, mapDispatchToProps)(viewDates)
 );

@@ -14,14 +14,14 @@ import firebase from "firebase/app";
 // };
 
 const firebaseConfig = {
-	apiKey: "AIzaSyB9jTD5Y7L3dljUZ-Wq2AGlu0du9BvWmD4",
-	authDomain: "fashion-rental-bfd7d.firebaseapp.com",
-	databaseURL: "https://fashion-rental-bfd7d.firebaseio.com",
-	projectId: "fashion-rental-bfd7d",
-	storageBucket: "fashion-rental-bfd7d.appspot.com",
-	messagingSenderId: "380815532244",
-	appId: "1:380815532244:web:9a77e69d6fcdc4ce9a5b41",
-	measurementId: "G-M02311SWW4"
+  apiKey: "AIzaSyB9jTD5Y7L3dljUZ-Wq2AGlu0du9BvWmD4",
+  authDomain: "fashion-rental-bfd7d.firebaseapp.com",
+  databaseURL: "https://fashion-rental-bfd7d.firebaseio.com",
+  projectId: "fashion-rental-bfd7d",
+  storageBucket: "fashion-rental-bfd7d.appspot.com",
+  messagingSenderId: "380815532244",
+  appId: "1:380815532244:web:9a77e69d6fcdc4ce9a5b41",
+  measurementId: "G-M02311SWW4"
 };
 
 firebase.initializeApp(firebaseConfig);
@@ -69,18 +69,28 @@ export const addCollectionAndDocuments = async (
 };
 
 export const convertCollectionsSnapshotToMap = collection => {
-//   console.log(collection);
+  //   console.log(collection);
   const transformedCollection = collection.docs.map(doc => {
     const { title, items } = doc.data();
-	// console.log(doc.data());
-	return {
+    // var x;
+    // for (x of items) {
+    //   if (x.id === 51) {
+    //     x.price = 500;
+    //   }
+    // }
+    // firestore
+    //   .collection("collections")
+    //   .doc(doc.id)
+    //   .update({
+    //     items: items
+    //   });
+    return {
       routeName: encodeURI(title.toLowerCase()),
       id: doc.id,
       title,
       items
     };
   });
-
   return transformedCollection.reduce((accumulator, collection) => {
     accumulator[collection.title.toLowerCase()] = collection;
     return accumulator;
